@@ -1,0 +1,26 @@
+class Solution {
+public:
+    typedef pair<int, int> PAIR;
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int, int >count;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            count[nums[i]]++;//计数
+        }
+        //优先级队列默认是大顶堆（从小到大排序）
+        //unordered_map默认按Key排序
+        //因此优先级队列每次出队为最大值
+        priority_queue<PAIR>tmpres;
+        for (auto it = count.begin(); it != count.end(); it++)
+        {
+            tmpres.push(PAIR(it->second,it->first));//插入优先级队列
+        }
+        vector<int> result;//保存结果集
+        for (int i = 0; i < k; i++)
+        {
+            result.push_back(tmpres.top().second); 
+            tmpres.pop();
+        }
+        return result;
+    }
+};
