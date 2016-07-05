@@ -1,0 +1,14 @@
+class Solution {
+public:
+    vector<int> countBits(int num) {
+        vector<int> ret(1, 0);  
+        int cnt = 0;  
+        while(cnt < num) {  
+            int sz = ret.size();  
+            for(int i=0; i<sz&&cnt<num; ++i,++cnt) {  
+                ret.push_back(ret[i]+1);  
+            }  
+        }  
+        return ret;
+    }
+};
