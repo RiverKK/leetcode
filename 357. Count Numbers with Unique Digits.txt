@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int countNumbersWithUniqueDigits(int n) {
+        if (n==0){
+            return 1;
+        }
+        
+        
+        int sum=9;
+        int index=0;
+        while(index<n-1){
+            int m=9-index;
+            if(m<=0)
+                break;
+            sum=sum*m;
+            index++;
+        }
+        int result=sum+countNumbersWithUniqueDigits(n-1);
+        return result;
+    }
+};
