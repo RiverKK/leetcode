@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        int slen=s.size(),tlen=t.size();
+        if(slen!=tlen)
+            return false;
+        else if(slen==0)
+            return true;
+        else{
+            unordered_map<char,char> str;
+            set<char> str2;
+            unordered_map<char,char>::iterator it;
+            set<char>::iterator it2;
+            for(int i=0;i<slen;i++){
+                it=str.find(s[i]);
+                if(it!=str.end()){
+                    if((it->second)!=t[i])
+                        return false;
+                }
+                else{
+                    it2=str2.find(t[i]);
+                    if(it2!=str2.end())
+                        return false;
+                    else{
+                        str[s[i]]=t[i];
+                        str2.insert(t[i]);
+                    }
+                }
+            }
+            return true;
+        }
+    }
+};

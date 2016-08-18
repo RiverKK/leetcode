@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string getHint(string secret, string guess) {
+        int len=secret.size();
+        int bulls=0;
+        int sec[10]={0};
+        int gue[10]={0};
+        for(int i=0;i<len;i++){
+            if(secret[i]==guess[i])
+                bulls++;
+            sec[secret[i]-'0']++;
+            gue[guess[i]-'0']++;
+        }
+        int count=0;
+        for(int i=0;i<10;i++){
+            count+=min(sec[i],gue[i]);
+        }
+        count-=bulls;
+        return to_string(bulls)+"A"+to_string(count)+"B";
+    }
+};

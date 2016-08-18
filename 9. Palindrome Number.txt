@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0)
+            return false;
+        int n=1;
+        while(x/n>=10)
+            n*=10;
+        while(x>0){
+            int left=x/n;
+            int right=x%10;
+            
+            if (left!=right)
+                return false;
+            else{
+                x=(x%n)/10;
+                n/=100;
+            }
+        }
+        return true;
+    }
+};
