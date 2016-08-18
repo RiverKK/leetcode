@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+        int m1=(C-A)*(D-B);
+        int m2=(G-E)*(H-F);
+        int area;
+        int len1=max(A,E);
+        int len2=min(C,G);
+        
+        int high1=max(B,F);
+        int high2=min(D,H);
+        
+        if(len2<=len1 || high2<=high1)
+            area= 0;
+        else
+            area=(len2-len1)*(high2-high1);
+        return m1+m2-area;
+    }
+};
