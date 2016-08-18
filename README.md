@@ -1,0 +1,2 @@
+# leetcode
+my learning leetcode
