@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool wordPattern(string pattern, string str) {
+        vector<string> stri;
+        int j=0;  
+        for(int i=0;i<str.size();i++){  
+            if(str[i]==' '){  
+                string tmp =str.substr(j,i-j);  
+                stri.push_back(tmp);  
+                j=i+1;  
+            }  
+            if(i==str.size()-1){  
+                string tmp =str.substr(j,i-j+1);  
+                stri.push_back(tmp);  
+            }  
+  
+        }
+        int n1=pattern.size(),n2=stri.size();
+        if(n1!=n2) return false;
+        map<char,string> res1;
+        map<string,char> res2;
+        map<char,string>::iterator it;
+        map<string,char>::iterator it2;
+        for(int i=0;i<n1;i++){
+            it=res1.find(pattern[i]);
+            it2=res2.find(stri[i]);
+            if(it==res1.end() && it2==res2.end()){
+                res1.insert(make_pair(pattern[i],stri[i]));
+                res2.insert(make_pair(stri[i],pattern[i]));
+            }
+            else{
+                if(it->second!=stri[i] || it2->second!=pattern[i]) return false;
+            }
+        }
+        return true;
+        
+    }
+};

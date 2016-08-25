@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        int n=nums.size();
+        if(n<2) return false;
+        map<int,int> res;
+        map<int,int>::iterator it;
+        for(int i=0;i<n;i++){
+            it=res.find(nums[i]);
+            if(it==res.end()) res[nums[i]]=i;
+            else{
+                if(i-it->second<=k) return true;
+                else it->second=i;
+            }
+        }
+        return false;
+    }
+};
