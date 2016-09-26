@@ -1,0 +1,22 @@
+//solution1
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        for(int i=0;i<k;i++){
+            nums.insert(nums.begin(),nums[n-1]);
+            nums.erase(nums.end()-1,nums.end());
+        }
+    }
+};
+//solution2 36ms
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        k=k%n;
+        reverse(nums.begin(),nums.begin()+n-k);
+        reverse(nums.begin()+n-k,nums.end());
+        reverse(nums.begin(),nums.end());
+    }
+};

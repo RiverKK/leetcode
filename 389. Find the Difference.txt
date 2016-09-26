@@ -1,0 +1,18 @@
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        unordered_map<char,int> vec;
+        for(int i=0;i<s.size();i++){
+            if(vec.find(s[i])!=vec.end()) vec[s[i]]++;
+            else vec[s[i]]=1;
+        }
+        for(int i=0;i<t.size();i++){
+            if(vec.find(t[i])==vec.end()) return t[i];
+            else{
+                if(vec[t[i]]==0) return t[i];
+                else vec[t[i]]--;
+            }
+        }
+        return '0';
+    }
+};

@@ -1,0 +1,87 @@
+//将Version分为intPart和floatPart
+class Solution {
+public:
+    int compareVersion(string version1, string version2) {
+        int intPart1=0,intPart2=0,floatPart1=0,floatPart2=0;
+        int flag=0;
+        for(int i=0;i<version1.size();i++){
+            if(flag==0){
+                if(version1[i]=='.') flag=1;
+                else intPart1=intPart1*10+(int)(version1[i]-'0');
+            }
+            else{
+                floatPart1=floatPart1*10+(int)(version1[i]-'0');
+            }
+        }
+        flag=0;
+        for(int i=0;i<version2.size();i++){
+            if(flag==0){
+                if(version2[i]=='.') flag=1;
+                else intPart2=intPart2*10+(int)(version2[i]-'0');
+            }
+            else{
+                floatPart2=floatPart2*10+(int)(version2[i]-'0');
+            }
+        }
+        if(intPart1<intPart2){
+            return -1;
+        }
+        else if(intPart1>intPart2){
+            return 1;
+        }
+        else{
+            if(floatPart1<floatPart2){
+                return -1;
+            }
+            else if(floatPart1>floatPart2){
+                return 1;
+            }
+            else return 0;
+        }
+     }
+};
+
+// vector存储多段版本
+class Solution {
+public:
+    int compareVersion(string version1, string version2) {
+        vector<int> res1,res2;
+        int tmp=0;
+        for(int i=0;i<version1.size();i++){
+            if(version1[i]!='.'){
+                tmp=10*tmp+(int)(version1[i]-'0');
+                if(i==(version1.size()-1)) res1.push_back(tmp);
+            }
+            else{
+                res1.push_back(tmp);
+                tmp=0;
+            }
+        }
+        tmp=0;
+        for(int i=0;i<version2.size();i++){
+            if(version2[i]!='.'){
+                tmp=10*tmp+(int)(version2[i]-'0');
+                if(i==(version2.size()-1)) res2.push_back(tmp);
+            }
+            else{
+                res2.push_back(tmp);
+                tmp=0;
+            }
+        }
+        int length = res1.size() - res2.size();  
+        for (int i=0; i<abs(length); i++)  
+        {  
+            if (length>0)  
+                res2.push_back(0);  
+            else  
+                res1.push_back(0);  
+        }  
+        for (int index = 0; index<res1.size(); index++)  
+        {  
+            if(res1[index] != res2[index])  
+                return (res1[index]>res2[index]) ? 1: -1;  
+        }  
+      
+        return 0;
+     }
+};
