@@ -1,0 +1,84 @@
+class Solution {
+public:
+    
+    string getStr(int n){
+        switch(n){
+            case 1: return "I";
+            case 2: return "II";
+            case 3: return "III";
+            case 4: return "IV";
+            case 5: return "V";
+            case 6:
+                return getStr(5)+getStr(1);
+            case 7:
+                return getStr(5)+getStr(2);
+            case 8:
+                return getStr(5)+getStr(3);
+            case 9: return "IX";
+            case 10: return "X";
+            case 20: return "XX";
+            case 30: return "XXX";
+            case 40: return "XL";
+            case 50: return "L";
+            case 60:
+                return getStr(50)+getStr(10);
+            case 70:
+                return getStr(50)+getStr(20);
+            case 80:
+                return getStr(50)+getStr(30);
+            case 90: return "XC";
+            case 100: return "C";
+            case 200: return "CC";
+            case 300: return "CCC";
+            case 400: return "CD";
+            case 500: return "D";
+            case 600:
+                return getStr(500)+getStr(100);
+            case 700:
+                return getStr(500)+getStr(200);
+            case 800:
+                return getStr(500)+getStr(300);
+            case 900: return "CM";
+            case 1000: return "M";
+            case 2000: return "MM";
+            case 3000: return "MMM";
+        }
+        return "";
+    }
+    string intToRoman(int num) {
+        if(num==0) return "";
+        string res;
+        int n=1;
+        int tmp=num;
+        while(tmp/10>0){
+            n++;
+            tmp=tmp/10;
+        }
+        int count=1;
+        for(int i=1;i<n;i++){
+            count*=10;
+        }
+        tmp=num/count*count;
+        return (res+getStr(tmp)+intToRoman(num%count));
+        
+    }
+};
+// version2
+class Solution {
+public:
+    string intToRoman(int num) {  
+        string thousand[4] = {"", "M", "MM","MMM"};  
+        string hundred[11] = {"", "C","CC","CCC","CD","D","DC","DCC","DCCC","CM"};   
+        string ten[11] = {"", "X", "XX","XXX","XL","L","LX","LXX","LXXX","XC"};   
+        string one[11] = {"", "I","II","III","IV","V","VI","VII","VIII","IX"};   
+        string result = "";  
+        string* trans[4] = {one, ten, hundred, thousand};  
+        int index = 0;  
+        while (num > 0) {  
+            result = trans[index][num % 10] + result;  
+            num = num / 10;  
+            index++;  
+        }  
+        return result;  
+    }  
+};

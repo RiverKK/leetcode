@@ -1,0 +1,30 @@
+class Solution {
+public:
+    void swap(vector<pair<int, int>>& people,int a ,int b){
+        int tmp1=people[a].first;
+        int tmp2=people[a].second;
+        people[a].first=people[b].first;
+        people[a].second=people[b].second;
+        people[b].first=tmp1;
+        people[b].second=tmp2;
+    }
+    vector<pair<int, int>> reconstructQueue(vector<pair<int, int>>& people) {
+        int len=people.size();
+        for(int i=0;i<len-1;i++){
+            for(int j=i+1;j<len;j++){
+                if(people[i].first<people[j].first) swap(people,i,j);
+                else if(people[i].first == people[j].first && people[i].second > people[j].second) swap(people,i,j);
+            }
+        }
+        vector<int> height,count;
+        for(int i=0;i<len;i++){
+            height.insert(height.begin()+people[i].second,people[i].first);
+            count.insert(count.begin()+people[i].second,people[i].second);
+        }
+        for(int i=0;i<len;i++){
+            people[i].first=height[i];
+            people[i].second=count[i];
+        }
+        return people;
+    }
+};
