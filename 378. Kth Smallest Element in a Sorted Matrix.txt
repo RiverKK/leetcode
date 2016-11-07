@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int getflag(vector<int> vec){
+        int n=vec.size();
+        int min,flag;
+        min=vec[0];
+        flag=0;
+        for(int i=0;i<n;i++){
+            if(vec[i]<min){
+                min=vec[i];
+                flag=i;
+            }
+        }
+        return flag;
+        
+    }
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int n=matrix.size();
+        vector<int> flag(n,0);
+        vector<int> res;
+        int result=0;;
+        for(int i=0;i<n;i++) res.push_back(matrix[i][0]);
+        for(int i=0;i<k;i++){
+            int tmp=getflag(res);
+            result=matrix[tmp][flag[tmp]];
+            flag[tmp]++;
+            if(flag[tmp]==n){
+                res[tmp]=matrix[n-1][n-1]+1;
+            }
+            else res[tmp]=matrix[tmp][flag[tmp]];
+            
+        }
+        return result;
+    }
+};
