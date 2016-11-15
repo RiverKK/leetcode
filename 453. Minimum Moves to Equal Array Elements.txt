@@ -1,0 +1,47 @@
+class Solution {
+public:
+    /*bool isEqual(vector<int>& nums){
+        int n=nums.size();
+        for(int i=1;i<n;i++){
+            if(nums[i-1]==nums[i]);
+            else return false;
+        }
+        return true;
+    }
+    void addOne(vector<int>& nums){
+        for(int i=0;i<nums.size()-1;i++){
+            nums[i]+=1;
+        }
+    }
+    int minMoves(vector<int>& nums) {
+        int n=nums.size();
+        int res=0;
+        if(n<=1) return 0;
+        sort(nums.begin(),nums.end());
+        while(1){
+            if(isEqual(nums)==true) break;
+            addOne(nums);
+            res++;
+            for(int i=n-2;i>=0;i--){
+                if(nums[n-1]<nums[i]){
+                    int tmp=nums[n-1];
+                    nums[n-1]=nums[i];
+                    nums[i]=tmp;
+                    break;
+                }
+            }
+        }
+        return res;
+    }*/
+    int minMoves(vector<int>& nums) {
+        int n=nums.size();
+        if(n<=1) return 0;
+        int sum=0,minNum=nums[0];
+        for(int i=0;i<n;i++){
+            sum+=nums[i];
+            if(nums[i]<minNum)
+                minNum=nums[i];
+        }
+        return sum-minNum*n;
+    }
+};
